@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\quiz",
+    "\\src\\quiz\\ransac",
+    "\\src\\render",
+    "\\src\\sensors"
+  ],
+  "SelectedNode": "\\src\\processPointClouds.h",
+  "PreviewInSolutionExplorer": false
+}
