@@ -1,3 +1,0 @@
-C:/Users/kokar/Downloads/SFND_Lidar_Obstacle_Detection-master/SFND_Lidar_Obstacle_Detection-master/out/build/x64-Debug/CMakeFiles/environment.dir
-C:/Users/kokar/Downloads/SFND_Lidar_Obstacle_Detection-master/SFND_Lidar_Obstacle_Detection-master/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/kokar/Downloads/SFND_Lidar_Obstacle_Detection-master/SFND_Lidar_Obstacle_Detection-master/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
