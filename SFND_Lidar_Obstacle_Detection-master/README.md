@@ -1,6 +1,6 @@
 # Sensor Fusion Self-Driving Car Course
 
-<img src="media/ObstacleDetectionFPS.gif" width="700" height="400" />
+<img src="media/lidar_obs_output.gif" width="700" height="400" />
 
 ### Project Goal
 
