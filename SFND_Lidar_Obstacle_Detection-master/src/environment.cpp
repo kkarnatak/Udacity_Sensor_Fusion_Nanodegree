@@ -111,20 +111,12 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     // -----Open 3D viewer and display City Block     -----
     // ----------------------------------------------------
 
-    //ProcessPointClouds<pcl::PointXYZI>* pointProcessorObj = new ProcessPointClouds<pcl::PointXYZI>();
-    //pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessorObj->loadPcd("../src/sensors/data/pcd/data_1/0000000000.pcd");
-    //renderPointCloud(viewer, inputCloud, "inputCloud");
-
     // Set the hyperparameters for cloud filtering
     Eigen::Vector4f minPoint(-20, -6, -3, 1);
     Eigen::Vector4f maxPoint(25, 6.5, 3, 1);
 
-    // Experiment with the ? values and find what works best
+    // Filter the cloud and reduce the no of points
     typename pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorObj->FilterCloud(inputCloud, 0.15, minPoint, maxPoint);
-    
-    //renderPointCloud(viewer, filterCloud, "filterCloud");
-    //std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> seg_result_pair = pointProcessorObj->SegmentPlane(filterCloud, 100, 0.3);
-    // renderPointCloud(viewer, segmentCloud.first, "obstacle");
     
     // Low iteration helps in faster processing ( e.g. > 50 too much time )
     std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorObj->KK_Custom_SegmentPlane(filterCloud, 25, 0.3);
@@ -182,28 +174,27 @@ int main (int argc, char** argv)
 {
     std::cout << "starting enviroment" << std::endl;
 
-        pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
+    pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
     CameraAngle setAngle = XY;
     initCamera(setAngle, viewer);
     //simpleHighway(viewer);
     //cityBlock(viewer);
 
-    ProcessPointClouds<pcl::PointXYZI>* pointProcessorI = new ProcessPointClouds<pcl::PointXYZI>();
-    std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("../../../src/sensors/data/pcd/data_1");
-    //std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("C:\\Users\\RE001710\\Documents\\GitHub\\SFND_Lidar_Obstacle_Detection-master\\src\\sensors\\data\\pcd\\data_1");
+    ProcessPointClouds<pcl::PointXYZI>* pointProcessorObj = new ProcessPointClouds<pcl::PointXYZI>();
+    std::vector<boost::filesystem::path> stream = pointProcessorObj->streamPcd("../src/sensors/data/pcd/data_1");
     auto streamIterator = stream.begin();
-    pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloudI;
+    pcl::PointCloud<pcl::PointXYZI>::Ptr inputPointCloud;
 
     while (!viewer->wasStopped())
     {
-
+        
         // Clear viewer
         viewer->removeAllPointClouds();
         viewer->removeAllShapes();
 
         // Load pcd and run obstacle detection process
-        inputCloudI = pointProcessorI->loadPcd((*streamIterator).string());
-        cityBlock(viewer, pointProcessorI, inputCloudI);
+        inputPointCloud = pointProcessorObj->loadPcd((*streamIterator).string());
+        cityBlock(viewer, pointProcessorObj, inputPointCloud);
 
         streamIterator++;
         if (streamIterator == stream.end())

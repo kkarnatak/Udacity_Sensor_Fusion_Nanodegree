@@ -19,6 +19,13 @@ void ProcessPointClouds<PointT>::numPoints(typename pcl::PointCloud<PointT>::Ptr
 }
 
 
+/*
+    [KK]: 10.02.2020
+    This method does voxel grid point reduction and region based filtering.
+    This helps in the reduction of the resolution and thus the total number of points being processed
+    [Comment]: Mostly copied from the lecture notes
+*/
+
 template<typename PointT>
 typename pcl::PointCloud<PointT>::Ptr ProcessPointClouds<PointT>::FilterCloud(typename pcl::PointCloud<PointT>::Ptr cloud, float filterRes, Eigen::Vector4f minPoint, Eigen::Vector4f maxPoint)
 {
@@ -472,7 +479,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::P
 
     // TODO:: Fill in the function to perform euclidean clustering to group detected obstacles
 
-     // Creating the KdTree object for the search method of the extraction
+    // Creating the KdTree object for the search method of the extraction
     pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>);
     tree->setInputCloud(cloud);
 
@@ -488,8 +495,9 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::P
     for (pcl::PointIndices fetchIndices: cluster_indices)
     {
         typename pcl::PointCloud<PointT>::Ptr cloud_cluster(new pcl::PointCloud<PointT>);
+
         for (int index: fetchIndices.indices)
-            cloud_cluster->points.push_back(cloud->points[index]); //*
+            cloud_cluster->points.push_back(cloud->points[index]);
         cloud_cluster->width = cloud_cluster->points.size();
         cloud_cluster->height = 1;
         cloud_cluster->is_dense = true;
@@ -499,6 +507,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::P
 
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
     std::cout << "clustering took " << elapsedTime.count() << " milliseconds and found " << clusters.size() << " clusters" << std::endl;
 
     return clusters;
@@ -531,7 +540,8 @@ Box ProcessPointClouds<PointT>::BoundingBox(typename pcl::PointCloud<PointT>::Pt
     Method to find minimum oriented bounding box.
     Source: http://codextechnicanum.blogspot.com/2015/04/find-minimum-oriented-bounding-box-of.html
 
-        Limitation: For now, works only for points with type XYZ, not for XYZI
+        Limitation: TODO: The z axis transformation still exists, leading to weird transformation
+        of the detected obstacles. Z-Axis has to be removed.
 
 ****************************************************************************************************/
 template<typename PointT>
