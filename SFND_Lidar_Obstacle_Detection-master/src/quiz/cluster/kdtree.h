@@ -33,7 +33,7 @@ struct KdTree
 		}
 		else
 		{
-			uint loc = depth % 2;
+			unsigned int loc = depth % 2;
 
 			// Fetch the location to insert:
 			// If Even pick X, Odd pick Y
@@ -57,7 +57,7 @@ struct KdTree
 		insertHelper(&root, 0, point, id);
 	}
 
-	void searchHelper(Node* node, uint depth, std::vector<float> target, float distanceTol, std::vector<int>& ids)
+	void searchHelper(Node* node, unsigned int depth, std::vector<float> target, float distanceTol, std::vector<int>& ids)
 	{
 		if (node != NULL)
 		{

@@ -47,6 +47,7 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
     
     // TODO:: Create lidar sensor 
     Lidar* lidarObj = new Lidar(cars, 0);
+
     // Create a point cloud by calling scan method on the lidar
     pcl::PointCloud<pcl::PointXYZ>::Ptr pointCloud = lidarObj->scan();
 
@@ -56,12 +57,11 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
     renderPointCloud(viewer, pointCloud, "InputPointCloud");
 
 
-    // TODO:: Create point processor
-  
+    // Create point processor  
     ProcessPointClouds<pcl::PointXYZ>* pointProcessorObj 
         = new ProcessPointClouds<pcl::PointXYZ>();
 
-    std::pair<pcl::PointCloud<pcl::PointXYZ>::Ptr, pcl::PointCloud<pcl::PointXYZ>::Ptr> segmentCloud = pointProcessorObj->SegmentPlane(pointCloud, 100, 0.2);
+    std::pair<pcl::PointCloud<pcl::PointXYZ>::Ptr, pcl::PointCloud<pcl::PointXYZ>::Ptr> segmentCloud = pointProcessorObj->KK_Custom_SegmentPlane(pointCloud, 100, 0.2);
     //renderPointCloud(viewer, segmentCloud.first, "obstCloud", Color(1, 0, 0));
     
     std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> cloudClusters = pointProcessorObj->KK_Custom_Clustering(segmentCloud.first, 1., 3, 80);
@@ -83,6 +83,21 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
     }
 }
 
+/********************************************************************************************************************
+    [KK]: 10.02.2020
+
+    cityBlock method received 3D points with intensity values along with the point processor object
+
+    It does the following:
+        1. Cloud filtering using the voxel grid point reduction and region based filtering.
+        2. KK_Custom_SegmentPlane method is called on the filtered cloud from step 1. It provides the plane and obstables PC.
+        4. Rendor the plane ( other than obstacles ) in GREEN.
+        3. KK_Custom_Clustering method is called on the obstables point cloud for clustering them.
+        4. Rendor the obstacles in BLUE, YELLOW, RED and CYAN
+        5. Rendox a bounding box in RED around the obstacles.
+
+********************************************************************************************************************/
+
 void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointClouds<pcl::PointXYZI>* pointProcessorObj, const pcl::PointCloud<pcl::PointXYZI>::Ptr& inputCloud)
 {
     // ----------------------------------------------------
@@ -92,39 +107,42 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     //ProcessPointClouds<pcl::PointXYZI>* pointProcessorObj = new ProcessPointClouds<pcl::PointXYZI>();
     //pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloud = pointProcessorObj->loadPcd("../src/sensors/data/pcd/data_1/0000000000.pcd");
     //renderPointCloud(viewer, inputCloud, "inputCloud");
-    Eigen::Vector4f minPoint(-30, -6.5, -3, 1);
-    Eigen::Vector4f maxPoint(30, 6.5, 10, 1);
+
+    // Set the hyperparameters for cloud filtering
+    Eigen::Vector4f minPoint(-20, -6, -3, 1);
+    Eigen::Vector4f maxPoint(25, 6.5, 3, 1);
 
     // Experiment with the ? values and find what works best
-    typename pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorObj->FilterCloud(inputCloud, 0.2, minPoint, maxPoint);
+    typename pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorObj->FilterCloud(inputCloud, 0.15, minPoint, maxPoint);
+    
     //renderPointCloud(viewer, filterCloud, "filterCloud");
-
     //std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> seg_result_pair = pointProcessorObj->SegmentPlane(filterCloud, 100, 0.3);
     // renderPointCloud(viewer, segmentCloud.first, "obstacle");
-    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorObj->SegmentPlane(filterCloud, 100, 0.3);
+    
+    // Low iteration helps in faster processing ( e.g. > 50 too much time )
+    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> segmentCloud = pointProcessorObj->KK_Custom_SegmentPlane(filterCloud, 25, 0.3);
+    
+    // Render the plane in GREEN
     renderPointCloud(viewer, segmentCloud.second, "plane", Color(0, 1, 0));
     //renderPointCloud(viewer, segmentCloud.first, "obstacle", Color(1, 0, 0));
 
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorObj->KK_Custom_Clustering(segmentCloud.first, .6, 10, 5000);
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorObj->KK_Custom_Clustering(segmentCloud.first, .6, 20, 5000);
 
     int clusterId = 0;
-    std::vector<Color> colors = { Color(1,0,0), Color(1,1,0), Color(0,0,1) };
-    int colorIndex = 0;
+    std::vector<Color> colors = { Color(1,0,0), Color(1,1,0), Color(0,0,1), Color(0,1,1)};
+
     for (pcl::PointCloud<pcl::PointXYZI>::Ptr cluster : cloudClusters)
     {
-        // Reset index for the colors after 2
-        if (colorIndex > 2)
-            colorIndex = 0;
+        std::cout << "cluster size ";
+        pointProcessorObj->numPoints(cluster);
+        // Render the Cluster point cloud: Green/Blue/Yellow
+        renderPointCloud(viewer, cluster, "obstacle_cloud " + std::to_string(clusterId), colors[clusterId % colors.size()]);
 
-        // render cluster point cloud: Green, Blue and Yellow
-        renderPointCloud(viewer, cluster, "obstacle_cloud " + std::to_string(clusterId), colors[colorIndex]);
-
-        // render box
+        // Create the bounding box
         Box box = pointProcessorObj->BoundingBox(cluster);
         // Bounding box: Red Color
         renderBox(viewer, box, clusterId, Color(1,0,0), 1);
 
-        colorIndex++;
         clusterId++;
     }
 }

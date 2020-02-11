@@ -42,7 +42,7 @@ public:
 
     std::unordered_set<int> KK_Custom_Ransac(typename pcl::PointCloud<PointT>::Ptr cloud, int maxIterations, float distanceTol);
 
-    std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr> SegmentPlane(typename pcl::PointCloud<PointT>::Ptr cloud, int maxIterations, float distanceThreshold);
+    std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr> KK_Custom_SegmentPlane(typename pcl::PointCloud<PointT>::Ptr cloud, int maxIterations, float distanceThreshold);
 
     void clusterHelper(std::vector<bool>& processedPoints, const std::vector<std::vector<float>>& points, KdTree* tree, float distanceTol, std::vector<int>& cluster, int index);
 
@@ -53,6 +53,8 @@ public:
     std::vector<typename pcl::PointCloud<PointT>::Ptr> PCL_Clustering(typename pcl::PointCloud<PointT>::Ptr cloud, float clusterTolerance, int minSize, int maxSize);
 
     Box BoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
+
+    void minBoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
 
     void savePcd(typename pcl::PointCloud<PointT>::Ptr cloud, std::string file);
 
