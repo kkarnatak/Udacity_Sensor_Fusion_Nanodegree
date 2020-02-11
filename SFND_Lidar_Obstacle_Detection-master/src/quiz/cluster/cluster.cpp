@@ -75,14 +75,64 @@ void render2DTree(Node* node, pcl::visualization::PCLVisualizer::Ptr& viewer, Bo
 
 }
 
+void clusterHelper(std::vector<bool>& processedPoints,
+    const std::vector<std::vector<float>>& points,
+    KdTree* tree, float distanceTol,
+    std::vector<int>& cluster,
+    int index)
+{
+
+    // Set the points being processed as true
+    processedPoints[index] = true;
+
+    // Add the index of the point to the cluster
+    cluster.push_back(index);
+
+    // Check for the points in proximity
+    std::vector<int> nearbyPoints = tree->search(points[index], distanceTol);
+
+    // Iterate through the nearby points and repeat the above steps for each
+    for (auto counter : nearbyPoints)
+    {
+        if (!processedPoints[counter])
+        {
+            clusterHelper(processedPoints, points, tree, distanceTol, cluster, counter);
+        }
+    }
+}
+
 std::vector<std::vector<int>> euclideanCluster(const std::vector<std::vector<float>>& points, KdTree* tree, float distanceTol)
 {
 
-	// TODO: Fill out this function to return list of indices for each cluster
+    // TODO: Fill out this function to return list of indices for each cluster
+    /* PSEUDOCODE:
+        EuclideanCluster():
+            list of clusters
+            Iterate through each point
+                If point has not been processed
+                    Create cluster
+                    Proximity(point, cluster)
+                    cluster add clusters
+            return clusters
+    */
 
-	std::vector<std::vector<int>> clusters;
- 
-	return clusters;
+    std::vector<std::vector<int>> clusters;
+
+    std::vector<bool> processedPoints(points.size(), false);
+
+    for (unsigned int index = 0; index < points.size(); index++)
+    {
+        // Process only if false, else ignore
+        if (processedPoints[index])
+            continue;
+
+        // Temporary cluster variable
+        std::vector<int> cluster;
+        clusterHelper(processedPoints, points, tree, distanceTol, cluster, index);
+        clusters.push_back(cluster);
+    }
+
+    return clusters;
 
 }
 

@@ -61,18 +61,23 @@ struct KdTree
 	{
 		if (node != NULL)
 		{
-			if ( (node->point[0] >= (target[0] - distanceTol) && node->point[0] <= (target[0] + distanceTol))
-				&& (node->point[1] >= (target[1] - distanceTol) && node->point[1] <= (target[1] + distanceTol)) )
+			float node_X = node->point[0];
+			float node_Y = node->point[1];
+			float target_X = target[0];
+			float target_Y = target[1];
+			if ( (node_X >= (target_X - distanceTol) && node_X <= (target_X + distanceTol))
+				&& (node_Y >= (target_Y - distanceTol) && node_Y <= (target_Y + distanceTol)) )
 			{
-				float distance = std::sqrt(pow(node->point[0] - target[0], 2) + pow(node->point[1] - target[1], 2));
+				float distance = std::sqrt( std::pow(node_X - target_X, 2) + std::pow(node_Y - target_Y, 2) );
 
-				if (distance <= distanceTol)
+				if (distance < distanceTol)
 					ids.push_back(node->id);
 			}
 
-			if ((target[depth % 2] - distanceTol) < node->point[depth % 2])
+			int d_index = depth % 2;
+			if ((target[d_index] - distanceTol) < node->point[d_index])
 				searchHelper(node->left, depth + 1, target, distanceTol, ids);
-			if ((target[depth % 2] + distanceTol) > node->point[depth % 2])
+			if ((target[d_index] + distanceTol) > node->point[d_index])
 				searchHelper(node->right, depth + 1, target, distanceTol, ids);
 		}
 	}
