@@ -68,6 +68,7 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
     renderPointCloud(viewer, segmentCloud.second, "planeCloud", Color(0, 1, 0));
 
     int clusterId = 0;
+    
     std::vector<Color> colors = { Color(1,0,0), Color(0,1,0), Color(0,0,1) };
 
     for (pcl::PointCloud<pcl::PointXYZ>::Ptr cluster : cloudClusters)
@@ -75,10 +76,16 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
         // render cluster point cloud
         renderPointCloud(viewer, cluster, "obstacle_cloud " + std::to_string(clusterId), colors[clusterId]);
 
-        // render box
-        Box box = pointProcessorObj->BoundingBox(cluster);
-        renderBox(viewer, box, clusterId, colors[clusterId], 1);
+        // render box in blue
+        //Box box = pointProcessorObj->BoundingBox(cluster);
+        //renderBox(viewer, box, clusterId, Color(0, 0, 1), 2);
+        // renderBox(viewer, box, clusterId, colors[clusterId], 1);
 
+        // Render the min oriented boxes in yellow [For comparison]
+        BoxQ boxQ = pointProcessorObj->minBoundingBox(cluster);
+        //renderBox(viewer, boxQ, clusterId, colors[clusterId], 1);
+        renderBox(viewer, boxQ, clusterId, Color(1,1,0), 1);
+        
         clusterId++;
     }
 }
@@ -182,7 +189,8 @@ int main (int argc, char** argv)
     //cityBlock(viewer);
 
     ProcessPointClouds<pcl::PointXYZI>* pointProcessorI = new ProcessPointClouds<pcl::PointXYZI>();
-    std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("../src/sensors/data/pcd/data_1");
+    std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("../../../src/sensors/data/pcd/data_1");
+    //std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("C:\\Users\\RE001710\\Documents\\GitHub\\SFND_Lidar_Obstacle_Detection-master\\src\\sensors\\data\\pcd\\data_1");
     auto streamIterator = stream.begin();
     pcl::PointCloud<pcl::PointXYZI>::Ptr inputCloudI;
 
@@ -200,7 +208,7 @@ int main (int argc, char** argv)
         streamIterator++;
         if (streamIterator == stream.end())
             streamIterator = stream.begin();
-
+            
         viewer->spinOnce();
     }
 }

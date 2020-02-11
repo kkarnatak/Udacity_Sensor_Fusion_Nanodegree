@@ -54,7 +54,7 @@ public:
 
     Box BoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
 
-    void minBoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
+    BoxQ minBoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
 
     void savePcd(typename pcl::PointCloud<PointT>::Ptr cloud, std::string file);
 
