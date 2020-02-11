@@ -224,6 +224,7 @@ std::unordered_set<int> ProcessPointClouds<PointT>::KK_Custom_Ransac(typename pc
             if (set_inliers.count(index) > 0)
                 continue;
 
+            // Assign values to variables: Saves fetching cost
             float point_X = cloud->points[index].x;
             float point_Y = cloud->points[index].y;
             float point_Z = cloud->points[index].z;
