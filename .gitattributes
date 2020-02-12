@@ -1,3 +1,4 @@
+Makefile linguist-language=cpp
 # Sources
 *.c     text diff=c
 *.cc    text diff=cpp
