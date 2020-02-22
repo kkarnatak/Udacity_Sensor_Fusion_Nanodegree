@@ -255,10 +255,19 @@ int main(int argc, const char *argv[])
 					/* MATCH KEYPOINT DESCRIPTORS */
 
 					vector<cv::DMatch> matches;
-					string matcherType = "MAT_FLANN";        // MAT_BF, MAT_FLANN
-					string descriptorType = "DES_BINARY"; // DES_BINARY, DES_HOG
+					string matcherType = "MAT_BF";        // MAT_BF, MAT_FLANN
+					string descriptorType;// Commented to avoid same setting for every descriptor = "DES_BINARY"; // DES_BINARY, DES_HOG
 					string selectorType = "SEL_KNN";       // SEL_NN, SEL_KNN
-
+					
+					// Use HOG descriptor only for SIFT
+					if (descriptorType.compare("SIFT") == 0) 
+                    {
+                        descriptorType == "DES_HOG";
+                    }
+                    else
+                    {
+                        descriptorType == "DES_BINARY";
+                    }       
 					//// STUDENT ASSIGNMENT
 					//// TASK MP.5 -> add FLANN matching in file matching2D.cpp
 					//// TASK MP.6 -> add KNN match selection and perform descriptor distance ratio filtering with t=0.8 in file matching2D.cpp

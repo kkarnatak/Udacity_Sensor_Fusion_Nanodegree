@@ -133,16 +133,23 @@ A flag `isWriteDetector` was introduced to keep track when to make an entry in t
 
 Detector Name | Img1 | Img2 | Img3  | Img4  | Img5 | Img6 | Img7  | Img8  | Img9  | Img10
 --------  | ------- | ------|---- | ------| -------|------ | ------ | --------| ------ | --------
-
-
 SHITOMASI	|125|	118|	123|	120|	120	|113	|114	|123|	111|	112
-HARRIS	17	14	18	21	26	43	18	31	26	34
-FAST	419	427	404	423	386	414	418	406	396	401
-BRISK	264	282	282	277	297	279	289	272	266	254
-ORB	92	102	106	113	109	125	130	129	127	128
-AKAZE	166	157	161	155	163	164	173	175	177	179
-SIFT	138	132	124	137	134	140	137	148	159	137
+HARRIS	|17	|14	|18|	21|	26 |	43	|18|	31|	26|	34
+FAST	|419	|427	|404|	423	|386	|414	|418|	406	|396|	401
+BRISK	|264	|282	|282|	277	|297	|279	|289|	272	|266|	254
+ORB	|92	|102	|106|	113|	109|	125	|130	|129|	127|	128
+AKAZE	|166	|157|	161	|155|	163|	164|	173|	175|	177|	179
+SIFT	|138	|132|	124	|137|	134	|140|	137	|148	|159	|137
 
+
+**Distribution of the detected keypoints**
+
+<img src="images/detector_shitomasi.PNG" width="460" height="260" /> <img src="images/detector_harris.PNG" width="460" height="260" /> 
+<img src="images/detector_fast.PNG" width="460" height="260" /> <img src="images/detector_brisk.PNG" width="460" height="260" />
+<img src="images/detector_orb.PNG" width="460" height="260" /> <img src="images/detector_akaze.PNG" width="460" height="260" />
+<img src="images/detector_sift.PNG" width="460" height="260" />
+
+**Range Of the Detected Keypoints**
 DETECTOR NAME | Keypoints Detected
 --------  | -------------------
 SHITOMASI | 111 ~ 125
@@ -152,6 +159,32 @@ BRISK     | 254 ~ 297
 ORB       |  92 ~ 130
 AKAZE     | 155 ~ 179
 SIFT      | 124 ~ 159
+
+CSV: [MP.7](./Keypoints_Task_MP7_Detectors.csv)
+
+### MP.8 Performance Evaluation 2
+
+A nested loop for descriptors was implemented with the for loop of the detectors. This way all the possible combinations except `AKAZE_AKAZE` was done. A csv file was created to dump the matches count information for each of the combinations. The code for this task can be found at: [MP.8](./src/MidTermProject_Camera_Student.cpp:80)
+
+The csv file with all the counted values is located at: [MP.8](./Keypoints_Task_MP8_Descriptors.csv)
+
+### MP.9 Performance Evaluation 3
+
+The time taken by the detectors to detect the keypoints, filtering keypoints around ROI, descriptors and then matching keypoints was computed and dumped into an csv file `Log_Time_Task_MP9.csv`. Link: [MP.9](./Log_Time_Task_MP9.csv)
+
+TOP | Descriptor Name	|	TOTAL |	AVERAGE |	STD DEV | 	CALC TIME | AVG CAL TIME
+----|------------|-------|---------|----------|--------|---------
+1 |FAST_BRIEF	|	2178	|242,0	|11,3|	202.138 | 0.09
+2 |FAST_ORB	|	2049|	227,7	|8,5|	243.119 | 0.12
+3 |FAST_SIFT|		2225	|247,2|	9,4	|391.366 | 0.18
+
+For evaluating the TOP 3, following were considered:
+
+<img src="images/top3.PNG">
+
+First the results were sorted on average time required per keypoint in ascending order. Then the methods with maximum number and maximum average of keypoints were detected. Finally, the top 3 methods with minimum avg time per keypoint and maximum avg keypoints were chosen.
+
+For more, refer to [TOP3](./Analysis.csv)
 
 ### Project Description
 
