@@ -99,9 +99,9 @@ The code could be found at [MP.4](./src/MidTermProject_Camera_Student.cpp#L244)
 
 ### MP.5 Descriptor Matching
 
-1. *FLANN* matching desciptor was implemented. As suggested in the lecture, special check was introduced to avoid data type mismtach issue. It was required for both variables `descSource` and `descRef`. The code can be found at: [MP.5 FLANN](./matching2D_Student.cpp:21)
+1. *FLANN* matching desciptor was implemented. As suggested in the lecture, special check was introduced to avoid data type mismtach issue. It was required for both variables `descSource` and `descRef`. The code can be found at: [MP.5 FLANN](./src/matching2D_Student.cpp#L21)
 
-2. *KNN* was also implemented with `k=2`. The code can be found at: [MP.5 KNN](./src/matching2D_Student.cpp:35)
+2. *KNN* was also implemented with `k=2`. The code can be found at: [MP.5 KNN](./src/matching2D_Student.cpp#L35)
 
 ### MP.6 Descriptor Distance Ratio
 
