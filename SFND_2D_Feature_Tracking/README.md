@@ -28,7 +28,7 @@ dataBuffer.push_back(frame);
 
 ```
 
-The associated code can be found here: [MP.1](./MidTermProject_Camera_Student.cpp:134)
+The associated code can be found here: [MP.1](./MidTermProject_Camera_Student.cpp#L134)
 
 ### MP.2 Keypoint Detection
 
@@ -59,7 +59,7 @@ else if(std::find(allDetectorTypes.begin(), allDetectorTypes.end(), detectorType
 }
 ```
 
-The code could be found at [MP.2](./MidTermProject_Camera_Student.cpp:164)
+The code could be found at [MP.2](./MidTermProject_Camera_Student.cpp#L164)
 
 ### MP.3 Keypoint Removal
 
@@ -80,7 +80,7 @@ for(it_keypoint = keypoints.begin(); it_keypoint != keypoints.end(); ++it_keypoi
 }
 ```
 
-The code for this can be found at: [MP.3](./MidTermProject_Camera_Student.cpp:182)
+The code for this can be found at: [MP.3](./MidTermProject_Camera_Student.cpp#L182)
 
 ### MP.4 Keypoint Descriptors
 
@@ -95,7 +95,7 @@ Similar to the detectors, a dynamic selection of different description algorithm
 
 For the above, a simple string comparison is done and the respective opencv method is invoked and the `keypoints` are returned (by reference).
 
-The code could be found at [MP.4](./MidTermProject_Camera_Student.cpp:244)
+The code could be found at [MP.4](./MidTermProject_Camera_Student.cpp#L244)
 
 ### MP.5 Descriptor Matching
 
@@ -109,7 +109,7 @@ The minimum distance ratio was set to 0.8 in the code implementing KNN. The matc
 ```c++ 
 if( ((*it)[0].distance) < (minDescDistRatio * (*it)[1].distance) ) 
 ```
-The code can be found at: [MP.6 KNN](./matching2D_Student.cpp:42)
+The code can be found at: [MP.6 KNN](./matching2D_Student.cpp#L42)
 
 ### MP.7 Performance Evaluation 1
 
@@ -125,7 +125,7 @@ for( auto current_detector : allDetectorTypes )
 }
 ```
 
-Please click here to go to the code: [MP.7](./MidTermProject_Camera_Student.cpp:76)
+Please click here to go to the code: [MP.7](./MidTermProject_Camera_Student.cpp#L76)
 
 A flag `isWriteDetector` was introduced to keep track when to make an entry in the csv file, and when to skip. This helped in the next task MP.8.
 
@@ -164,7 +164,7 @@ CSV: [MP.7](./Keypoints_Task_MP7_Detectors.csv)
 
 ### MP.8 Performance Evaluation 2
 
-A nested loop for descriptors was implemented with the for loop of the detectors. This way all the possible combinations except `AKAZE_AKAZE` was done. A csv file was created to dump the matches count information for each of the combinations. The code for this task can be found at: [MP.8](./src/MidTermProject_Camera_Student.cpp:80)
+A nested loop for descriptors was implemented with the for loop of the detectors. This way all the possible combinations except `AKAZE_AKAZE` was done. A csv file was created to dump the matches count information for each of the combinations. The code for this task can be found at: [MP.8](./src/MidTermProject_Camera_Student.cpp#L80)
 
 The csv file with all the counted values is located at: [MP.8](./Keypoints_Task_MP8_Descriptors.csv)
 
