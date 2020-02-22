@@ -173,8 +173,9 @@ The csv file with all the counted values is located at: [MP.8](./Keypoints_Task_
 
 The time taken by the detectors to detect the keypoints, filtering keypoints around ROI, descriptors and then matching keypoints was computed and dumped into an csv file `Log_Time_Task_MP9.csv`. Link: [MP.9](./Log_Time_Task_MP9.csv)
 
+
 TOP | Descriptor Name	|	TOTAL Keypoints |	AVERAGE Keypoints |	 	CALC TIME | CAL TIME / Keypoints
-----|------------|-------|---------|----------|--------|---------
+----|------------|-------|---------|----------|-----------------
 1 |FAST_BRIEF	|	2178	|242,0	|	132.33 | 0.06
 2 |FAST_ORB	|	2061|	229	|	130.10 | 0.06
 3 |FAST_SIFT|		2225	|247,2|256.66 | 0.11
