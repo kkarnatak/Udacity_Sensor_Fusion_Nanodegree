@@ -28,7 +28,7 @@ dataBuffer.push_back(frame);
 
 ```
 
-The associated code can be found here: [MP.1](./MidTermProject_Camera_Student.cpp#L134)
+The associated code can be found here: [MP.1](./src/MidTermProject_Camera_Student.cpp#L134)
 
 ### MP.2 Keypoint Detection
 
@@ -59,7 +59,7 @@ else if(std::find(allDetectorTypes.begin(), allDetectorTypes.end(), detectorType
 }
 ```
 
-The code could be found at [MP.2](./MidTermProject_Camera_Student.cpp#L164)
+The code could be found at [MP.2](./src/MidTermProject_Camera_Student.cpp#L164)
 
 ### MP.3 Keypoint Removal
 
@@ -80,7 +80,7 @@ for(it_keypoint = keypoints.begin(); it_keypoint != keypoints.end(); ++it_keypoi
 }
 ```
 
-The code for this can be found at: [MP.3](./MidTermProject_Camera_Student.cpp#L182)
+The code for this can be found at: [MP.3](./src/MidTermProject_Camera_Student.cpp#L182)
 
 ### MP.4 Keypoint Descriptors
 
@@ -95,13 +95,13 @@ Similar to the detectors, a dynamic selection of different description algorithm
 
 For the above, a simple string comparison is done and the respective opencv method is invoked and the `keypoints` are returned (by reference).
 
-The code could be found at [MP.4](./MidTermProject_Camera_Student.cpp#L244)
+The code could be found at [MP.4](./src/MidTermProject_Camera_Student.cpp#L244)
 
 ### MP.5 Descriptor Matching
 
 1. *FLANN* matching desciptor was implemented. As suggested in the lecture, special check was introduced to avoid data type mismtach issue. It was required for both variables `descSource` and `descRef`. The code can be found at: [MP.5 FLANN](./matching2D_Student.cpp:21)
 
-2. *KNN* was also implemented with `k=2`. The code can be found at: [MP.5 KNN](./matching2D_Student.cpp:35)
+2. *KNN* was also implemented with `k=2`. The code can be found at: [MP.5 KNN](./src/matching2D_Student.cpp:35)
 
 ### MP.6 Descriptor Distance Ratio
 
@@ -109,7 +109,7 @@ The minimum distance ratio was set to 0.8 in the code implementing KNN. The matc
 ```c++ 
 if( ((*it)[0].distance) < (minDescDistRatio * (*it)[1].distance) ) 
 ```
-The code can be found at: [MP.6 KNN](./matching2D_Student.cpp#L42)
+The code can be found at: [MP.6 KNN](./src/matching2D_Student.cpp#L42)
 
 ### MP.7 Performance Evaluation 1
 
@@ -125,7 +125,7 @@ for( auto current_detector : allDetectorTypes )
 }
 ```
 
-Please click here to go to the code: [MP.7](./MidTermProject_Camera_Student.cpp#L76)
+Please click here to go to the code: [MP.7](./src/MidTermProject_Camera_Student.cpp#L76)
 
 A flag `isWriteDetector` was introduced to keep track when to make an entry in the csv file, and when to skip. This helped in the next task MP.8.
 
@@ -150,6 +150,7 @@ SIFT	|138	|132|	124	|137|	134	|140|	137	|148	|159	|137
 <img src="images/detector_sift.PNG" width="460" height="260" />
 
 **Range Of the Detected Keypoints**
+
 DETECTOR NAME | Keypoints Detected
 --------  | -------------------
 SHITOMASI | 111 ~ 125
