@@ -53,7 +53,7 @@ void loadLidarFromFile(vector<LidarPoint> &lidarPoints, string filename)
 }
 
 
-void showLidarTopview(std::vector<LidarPoint> &lidarPoints, cv::Size worldSize, cv::Size imageSize, bool bWait)
+void showLidarTopview(std::vector<LidarPoint> &lidarPoints, cv::Size worldSize, cv::Size imageSize, std::string windowName, bool bWait)
 {
     // create topview image
     cv::Mat topviewImg(imageSize, CV_8UC3, cv::Scalar(0, 0, 0));
@@ -80,7 +80,7 @@ void showLidarTopview(std::vector<LidarPoint> &lidarPoints, cv::Size worldSize, 
     }
 
     // display image
-    string windowName = "Top-View Perspective of LiDAR data";
+    //string windowName = "Top-View Perspective of LiDAR data";
     cv::namedWindow(windowName, 2);
     cv::imshow(windowName, topviewImg);
     if(bWait)

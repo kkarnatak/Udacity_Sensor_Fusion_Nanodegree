@@ -188,6 +188,11 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
     
     // compute distance ratios between all matched keypoints
     vector<double> distRatios; // stores the distance ratios for all keypoints between curr. and prev. frame
+
+    // Added to avoid crash when no keypoints were found for certain detectors, e.g. HARRIS
+    if( kptMatches.size() == 0 )
+        return;
+
     for (auto it1 = kptMatches.begin(); it1 != kptMatches.end() - 1; ++it1)
     { // outer kpt. loop
 

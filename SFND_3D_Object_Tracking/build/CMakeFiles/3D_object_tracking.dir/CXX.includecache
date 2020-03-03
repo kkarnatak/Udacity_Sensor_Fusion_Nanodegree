@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/FinalProject_Camera.cpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/FinalProject_Camera.cpp
 iostream
 -
 fstream
@@ -34,17 +34,21 @@ opencv2/xfeatures2d.hpp
 opencv2/xfeatures2d/nonfree.hpp
 -
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 matching2D.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/matching2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/matching2D.hpp
 objectDetection2D.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
 lidarData.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/lidarData.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/lidarData.hpp
 camFusion.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/camFusion.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/camFusion.hpp
+sys/types.h
+-
+sys/stat.h
+-
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/camFusion.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/camFusion.hpp
 stdio.h
 -
 vector
@@ -52,9 +56,9 @@ vector
 opencv2/core.hpp
 -
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/camFusion_Student.cpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/camFusion_Student.cpp
 iostream
 -
 algorithm
@@ -68,11 +72,11 @@ opencv2/imgproc/imgproc.hpp
 unordered_map
 -
 camFusion.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/camFusion.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/camFusion.hpp
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 vector
 -
 map
@@ -80,7 +84,7 @@ map
 opencv2/core.hpp
 -
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/lidarData.cpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/lidarData.cpp
 iostream
 -
 algorithm
@@ -90,9 +94,9 @@ opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
 -
 lidarData.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/lidarData.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/lidarData.hpp
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/lidarData.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/lidarData.hpp
 stdio.h
 -
 fstream
@@ -100,9 +104,9 @@ fstream
 string
 -
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/matching2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/matching2D.hpp
 stdio.h
 -
 iostream
@@ -130,15 +134,15 @@ opencv2/xfeatures2d.hpp
 opencv2/xfeatures2d/nonfree.hpp
 -
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/matching2D_Student.cpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/matching2D_Student.cpp
 numeric
 -
 matching2D.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/matching2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/matching2D.hpp
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/objectDetection2D.cpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/objectDetection2D.cpp
 fstream
 -
 sstream
@@ -152,15 +156,15 @@ opencv2/imgproc.hpp
 opencv2/highgui.hpp
 -
 objectDetection2D.hpp
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
 
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/objectDetection2D.hpp
 stdio.h
 -
 opencv2/core.hpp
 -
 dataStructures.h
-/mnt/c/KKTemp/SFND_3D_Object_Tracking/src/dataStructures.h
+/mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/src/dataStructures.h
 
 /usr/local/include/opencv4/opencv2/calib3d.hpp
 opencv2/core.hpp

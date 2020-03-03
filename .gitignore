@@ -1,1 +1,4 @@
 .vs/
+SFND_3D_Object_Tracking/build/
+*.o
+*.so
