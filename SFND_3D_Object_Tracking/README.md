@@ -5,7 +5,7 @@
 [Rubric Points: ](https://review.udacity.com/#!/rubrics/2550/view)
 
 ## FP.1 Match 3D Objects
-Refer to the code here: [matchBoundingBoxes FP.1](./src/camFusion_Student.cpp#L316)
+Refer to the code here: [matchBoundingBoxes FP.1](./src/camFusion_Student.cpp#L294)
 
 The method `matchBoudingBoxes()` uses multimap to store the box ids.
 
@@ -83,7 +83,7 @@ The method `matchBoudingBoxes()` uses multimap to store the box ids.
     bbBestMatches.insert({maxVectorIndex, index});
 
 ## FP.2 Compute Lidar-based TTC
-Refer to the code here: [TTC from LIDAR FP.2](./src/camFusion_Student.cpp#L243)
+Refer to the code here: [TTC from LIDAR FP.2](./src/camFusion_Student.cpp#L242)
 1. The constant velocity model equation was used to do this calculation
     ```cpp
     TTC = d1 * (1.0 / frameRate) / (d0 - d1);
@@ -105,7 +105,7 @@ Refer to the code here: [TTC from LIDAR FP.2](./src/camFusion_Student.cpp#L243)
     }
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
-Refer to the code here: [Keypoint Correspondences FP.3]("./src/TTC = (-1.0 / frameRate) / (1 - medianDistRatio);135")
+Refer to the code here: [Keypoint Correspondences FP.3](`./src/TTC = (-1.0 / frameRate) / (1 - medianDistRatio);135`)
 For each bounding box the method [clusterKptMatchesWithROI](./src/camFusion_Student.cpp#L135) is called. It does the following:
 
 1. It iterates over the keypoint matches and look for the point in the matches within the current keypoints vector. If found, its added to the keypoint vector which falls in ROI.
@@ -169,13 +169,13 @@ The performance evaluation was done by using code from the mid term project. The
 The outliers effect on the TTC computation was reduced by using the median, instead of the closest found point. However, still there were few frames where the TTC computed from LIDAR didnt match the manual walkthrough over the images. For e.g. :
 | 1st Frame  | 2nd Frame   | 3rd Frame  | 
 |---|---|---|
-|  <img src="images/0000000001.png" width="779" height="414" /> | <img src="images/0000000002.png" width="779" height="414" />  |<img src="images/0000000003.png" width="779" height="414" />   |
+|  <img src="images/0000000001.png" width="400" height="200" /> | <img src="images/0000000002.png" width="400" height="200" />  |<img src="images/0000000003.png" width="400" height="200" />   |
 
 Top View:
 
 | 1st Frame  | 2nd Frame   | 3rd Frame  | 
 |---|---|---|
-|  <img src="images/img_00_topview_01.PNG" width="779" height="414" /> | <img src="images/img_02_topview_01.PNG" width="779" height="414" />  |<img src="images/img_03_topview_01.PNG" width="779" height="414" />   |
+|  <img src="images/img_00_topview_01.PNG" width="400" height="200" /> | <img src="images/img_02_topview_01.PNG" width="400" height="200" />  |<img src="images/img_03_topview_01.PNG" width="400" height="200" />   |
 
 Some points detected by the lidar belongs to preceding vehicles mirror, which induces an error in TTC computation.
 
