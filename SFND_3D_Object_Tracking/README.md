@@ -132,7 +132,7 @@ For each bounding box the method [clusterKptMatchesWithROI](./src/camFusion_Stud
         meanDistance = sumDistance / kpVectorSize;
     }
 
-3. Check if the `kpMatch.distance` value is below the threshold distance computed using [step 2](./README.nd#L120) and a threshold factor. If true, add it to the filtered bounding boxes.
+3. Check if the `kpMatch.distance` value is below the threshold distance computed using [step 2](./README.md#L120) and a threshold factor. If true, add it to the filtered bounding boxes.
 
     ```cpp
     const double c_THRESHOLD_FACTOR = 0.7;
