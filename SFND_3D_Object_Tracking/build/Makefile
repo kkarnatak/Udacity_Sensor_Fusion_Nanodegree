@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking
+CMAKE_SOURCE_DIR = /mnt/c/Users/RE001710/Documents/GitHub/SFND_3D_Object_Tracking
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/build
+CMAKE_BINARY_DIR = /mnt/c/Users/RE001710/Documents/GitHub/SFND_3D_Object_Tracking/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/build/CMakeFiles /mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/RE001710/Documents/GitHub/SFND_3D_Object_Tracking/build/CMakeFiles /mnt/c/Users/RE001710/Documents/GitHub/SFND_3D_Object_Tracking/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Udacity_Sensor_Fusion_Nanodegree/SFND_3D_Object_Tracking/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/RE001710/Documents/GitHub/SFND_3D_Object_Tracking/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

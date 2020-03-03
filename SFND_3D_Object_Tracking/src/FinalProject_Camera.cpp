@@ -97,6 +97,7 @@ int main(int argc, const char *argv[])
 	allDescripterTypes.push_back("BRIEF");
 	allDescripterTypes.push_back("ORB");
 	allDescripterTypes.push_back("FREAK");
+    //allDescripterTypes.push_back("AKAZE");
 
     for(auto currentDetector:allDetectorTypes) // start loop detector_types
     {
@@ -188,7 +189,7 @@ int main(int argc, const char *argv[])
                 cropLidarPoints(lidarPoints, minX, maxX, maxY, minZ, maxZ, minR);
             
                 (dataBuffer.end() - 1)->lidarPoints = lidarPoints;
-                //showLidarTopview((dataBuffer.end() - 1)->lidarPoints, cv::Size(4.0, 20.0), cv::Size(1000, 800), "Before Filtering Outliers" );
+
                 cout << "#3 : CROP LIDAR POINTS done" << endl;
                 std::cout << "===========================================================================================\n";
 
@@ -199,10 +200,12 @@ int main(int argc, const char *argv[])
                 clusterLidarWithROI((dataBuffer.end()-1)->boundingBoxes, (dataBuffer.end() - 1)->lidarPoints, shrinkFactor, P_rect_00, R_rect_00, RT);
                 //showLidarTopview((dataBuffer.end() - 1)->lidarPoints, cv::Size(4.0, 20.0), cv::Size(800, 600), "After applying filtering" );
                 // Visualize 3D objects
+                
+                cout << "[KKLOG]: IMAGE: " << imgFullFilename << endl;
                 bVis = false;
                 if(bVis)
                 {
-                    show3DObjects((dataBuffer.end()-1)->boundingBoxes, cv::Size(4.0, 20.0), cv::Size(800, 600), true);
+                    show3DObjects((dataBuffer.end()-1)->boundingBoxes, cv::Size(4.0, 20.0), cv::Size(2000, 2000), true);
                 }
                 bVis = false;
 
@@ -351,7 +354,8 @@ int main(int argc, const char *argv[])
                             //// TASK FP.4 -> compute time-to-collision based on camera (implement -> computeTTCCamera)
                             double ttcCamera;
                             clusterKptMatchesWithROI(*currBB, (dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints, (dataBuffer.end() - 1)->kptMatches);                    
-                            // showLidarTopview((dataBuffer.end() - 1)->lidarPoints, cv::Size(4.0, 20.0), cv::Size(1000, 800), "After after applying filtering" );
+                            //if( imgIndex == 2)
+                            //    showLidarTopview(currBB->lidarPoints, cv::Size(4.0, 20.0), cv::Size(2000, 2000), "After applying filtering",true );
                             computeTTCCamera((dataBuffer.end() - 2)->keypoints, (dataBuffer.end() - 1)->keypoints, currBB->kptMatches, sensorFrameRate, ttcCamera);
                             //// EOF STUDENT ASSIGNMENT
 

@@ -176,7 +176,7 @@ void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint
         }
     }
 
-    std::cout << "Total kp match size = " << boundingBox.kptMatches.size() << std::endl;
+    std::cout << "Total matched keypoint size: " << boundingBox.kptMatches.size() << std::endl;
 }
 
 
@@ -235,7 +235,6 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
     long medIndex = floor(distRatios.size() / 2.0);
     double medDistRatio = distRatios.size() % 2 == 0 ? (distRatios[medIndex - 1] + distRatios[medIndex]) / 2.0 : distRatios[medIndex]; // compute median dist. ratio to remove outlier influence
 
-    dT = 1 / frameRate;
     TTC = -dT / (1 - medDistRatio);
 }
 
@@ -253,29 +252,6 @@ void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
 
     vector<double> vecPrevPoints;
     vector<double> vecCurrPoints;
-
-    /*
-    for (auto it = lidarPointsPrev.begin(); it != lidarPointsPrev.end(); ++it)
-    {
-        
-        if (abs(it->y) <= c_LANE_WIDTH / 2.0)
-        { // 3D point within ego lane?
-            //minXPrev = minXPrev > it->x ? it->x : minXPrev;
-            vecPrevPoints.push_back(it->x);
-        }
-    }
-
-    
-    for (auto it = lidarPointsCurr.begin(); it != lidarPointsCurr.end(); ++it)
-    {
-
-        if (abs(it->y) <= c_LANE_WIDTH / 2.0)
-        { // 3D point within ego lane?
-            // minXCurr = minXCurr > it->x ? it->x : minXCurr;
-            vecCurrPoints.push_back(it->x);
-        }
-    }
-    */
 
     for( auto lidarPoints : lidarPointsPrev )
     {
@@ -299,12 +275,14 @@ void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
             minXPrev += x;
        minXPrev = minXPrev / lidarPointsPrev.size();
     }
+
     if (lidarPointsCurr.size() > 0)
     {
        for (auto x: vecCurrPoints)
            minXCurr += x;
        minXCurr = minXCurr / lidarPointsCurr.size();
     }
+
     // compute TTC from both measurements
     cout << "minXCurr: " << minXCurr << endl;
     cout << "minXPrev: " << minXPrev << endl;
@@ -364,38 +342,56 @@ void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &bb
         }
 
         mMapForMatches.insert(std::pair<int, int>(foundCurrBoxId, foundPrevBoxId));
+
+        // Store the max previous Box ID, will be used later.
         maxPrevBoxID = std::max(maxPrevBoxID, foundPrevBoxId);
     }
 
-    vector<int> currFrameBoxIDs {};
-    for (auto box : currFrame.boundingBoxes) currFrameBoxIDs.push_back(box.boxID);
+    // Temp vector to store the box Ids for the current frame
+    vector<int> currFrameBoxIDs;
 
+    for (auto box : currFrame.boundingBoxes) 
+    {
+        currFrameBoxIDs.push_back(box.boxID);
+    }
+
+    // Iterate through the vector with boxIds for current frame
     for( auto index : currFrameBoxIDs )
     {
         int count = 0;
-        auto rangePrevBoxIDs = mMapForMatches.equal_range(index);
+
+        // This helps to get the range that includes all the elements in the multimap which have a key equal to index
+        auto rangeBoxIds = mMapForMatches.equal_range(index);
+
         // Create a vector of counts (per current bbox) of prevBoxIDs
         std::vector<int> counts(maxPrevBoxID + 1, 0);
-        // Accumulator loop
-        for (auto it = rangePrevBoxIDs.first; it != rangePrevBoxIDs.second; ++it) {
-            if (-1 != (*it).second) counts[(*it).second] += 1;
+        
+        // Iterate the found range
+        for (auto it = rangeBoxIds.first; it != rangeBoxIds.second; ++it) 
+        {
+            // Increment the value in the vector
+            if ((*it).second != -1) 
+            {
+                counts[(*it).second] += 1;
+            }
         }
 
-        // Get the index of the maximum count (the mode) of the previous frame's boxID
-        int modeIndex = std::distance(counts.begin(), std::max_element(counts.begin(), counts.end()));
+        // Fetch the maximum index using std::distance
+        // It will be the most likely match boxID of the previous frame
+        int maxVectorIndex = std::distance(counts.begin(), std::max_element(counts.begin(), counts.end()));
 
-        // Set the best matching bounding box map with
-        // key   = Previous frame's most likely matching boxID
-        // value = Current frame's boxID, k
-        bbBestMatches.insert({modeIndex, index});
+        bbBestMatches.insert({maxVectorIndex, index});
     }
 
-    // Display the matches
+    // Show the box matches info msg
     bool bMsg = true;
+
     if (bMsg)
     {
         for (int i = 0; i < previousFrame; i++)
-            cout << "Box " << i << " matches " << bbBestMatches[i] << " box" << endl;
+        {
+            cout << "Matches for box " << i << " : " << bbBestMatches[i] << " box(es)" << endl;
+        }
     }
     
 }
