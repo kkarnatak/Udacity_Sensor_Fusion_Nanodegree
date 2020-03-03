@@ -105,7 +105,7 @@ Refer to the code here: [TTC from LIDAR FP.2](./src/camFusion_Student.cpp#L242)
     }
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
-Refer to the code here: [Keypoint Correspondences FP.3](`./src/TTC = (-1.0 / frameRate) / (1 - medianDistRatio);135`)
+Refer to the code here: [Keypoint Correspondences FP.3](./src/camFusion_Student.cpp#L135)
 For each bounding box the method [clusterKptMatchesWithROI](./src/camFusion_Student.cpp#L135) is called. It does the following:
 
 1. It iterates over the keypoint matches and look for the point in the matches within the current keypoints vector. If found, its added to the keypoint vector which falls in ROI.
