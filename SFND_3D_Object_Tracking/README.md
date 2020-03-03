@@ -5,7 +5,7 @@
 [Rubric Points: ](https://review.udacity.com/#!/rubrics/2550/view)
 
 ## FP.1 Match 3D Objects
-Refer to the code here: [matchBoundingBoxes FP.1]("./src/camFusion_Student.cpp#L316")
+Refer to the code here: [matchBoundingBoxes FP.1](./src/camFusion_Student.cpp#L316)
 
 The method `matchBoudingBoxes()` uses multimap to store the box ids.
 
@@ -83,7 +83,7 @@ The method `matchBoudingBoxes()` uses multimap to store the box ids.
     bbBestMatches.insert({maxVectorIndex, index});
 
 ## FP.2 Compute Lidar-based TTC
-Refer to the code here: [TTC from LIDAR FP.2]("./src/camFusion_Student.cpp#L243")
+Refer to the code here: [TTC from LIDAR FP.2](./src/camFusion_Student.cpp#L243)
 1. The constant velocity model equation was used to do this calculation
     ```cpp
     TTC = d1 * (1.0 / frameRate) / (d0 - d1);
@@ -106,7 +106,7 @@ Refer to the code here: [TTC from LIDAR FP.2]("./src/camFusion_Student.cpp#L243"
 
 ## FP.3 Associate Keypoint Correspondences with Bounding Boxes
 Refer to the code here: [Keypoint Correspondences FP.3]("./src/TTC = (-1.0 / frameRate) / (1 - medianDistRatio);135")
-For each bounding box the method [clusterKptMatchesWithROI]("./src/camFusion_Student.cpp#L135") is called. It does the following:
+For each bounding box the method [clusterKptMatchesWithROI](./src/camFusion_Student.cpp#L135) is called. It does the following:
 
 1. It iterates over the keypoint matches and look for the point in the matches within the current keypoints vector. If found, its added to the keypoint vector which falls in ROI.
     ```cpp
@@ -149,7 +149,7 @@ For each bounding box the method [clusterKptMatchesWithROI]("./src/camFusion_Stu
     }
 
 ## FP.4 Compute Camera-based TTC
-Refer to the code here: [Camera Based TTC]("./src/camFusion_Student.cpp#L184")
+Refer to the code here: [Camera Based TTC](./src/camFusion_Student.cpp#L184)
 1. The main equation used to compute TTC is below:
     
     ```cpp
@@ -164,7 +164,7 @@ Refer to the code here: [Camera Based TTC]("./src/camFusion_Student.cpp#L184")
 
 
 ## FP.5 Performance Evaluation 1
-The performance evaluation was done by using code from the mid term project. The TTC computation was run was every detector and descriptor combination resulting in the following CSV file: [Performance_Evaluation_FP_6.csv]("./Performance_Evaluation_FP_6.csv"). The TTC overlay images for each detector descriptor combination are stored in dir: [PerformanceDataImgs/]("./PerformanceDataImgs/")
+The performance evaluation was done by using code from the mid term project. The TTC computation was run was every detector and descriptor combination resulting in the following CSV file: [Performance_Evaluation_FP_6.csv](./Performance_Evaluation_FP_6.csv). The TTC overlay images for each detector descriptor combination are stored in dir: [PerformanceDataImgs/]("./PerformanceDataImgs/")
 
 The outliers effect on the TTC computation was reduced by using the median, instead of the closest found point. However, still there were few frames where the TTC computed from LIDAR didnt match the manual walkthrough over the images. For e.g. :
 | 1st Frame  | 2nd Frame   | 3rd Frame  | 
@@ -180,9 +180,9 @@ Top View:
 Some points detected by the lidar belongs to preceding vehicles mirror, which induces an error in TTC computation.
 
 ## FP.6 Performance Evaluation 2
-The decriptor and detector combination was run with regards to the TTC computation frame by frame basis. The results are dumpted in the following file: [Performance_Evaluation_FP_6.csv]("./Performance_Evaluation_FP_6.csv"). There are two more csv files which entails the analysis:
-1. [Performance_Evaluation_Analysis_Dect_desp_group.xlsx]("./Performance_Evaluation_Analysis_Dect_desp_group.xlsx") Contains the group wise analysis for each detector-decriptor group.
-2. [Performance_Evaluation_Analysis_top_worst_performer.xlsx]("./Performance_Evaluation_Analysis_top_worst_performer.xlsx") Contains top and worst performers for overall image dataset.
+The decriptor and detector combination was run with regards to the TTC computation frame by frame basis. The results are dumpted in the following file: [Performance_Evaluation_FP_6.csv](./Performance_Evaluation_FP_6.csv). There are two more csv files which entails the analysis:
+1. [Performance_Evaluation_Analysis_Dect_desp_group.xlsx](./Performance_Evaluation_Analysis_Dect_desp_group.xlsx) Contains the group wise analysis for each detector-decriptor group.
+2. [Performance_Evaluation_Analysis_top_worst_performer.xlsx](./Performance_Evaluation_Analysis_top_worst_performer.xlsx) Contains top and worst performers for overall image dataset.
 
 ### Results:
   __Performance of detector/descriptor combination on the entire image dataset:__
@@ -201,7 +201,7 @@ The decriptor and detector combination was run with regards to the TTC computati
   |  <img src="images/top_performer.PNG" width="779" height="414" /> | <img src="images/Worst_Performer.PNG" width="779" height="414" />  |
 
   Note: Please ignore the duplicate det/desc combination in the chart above.
-  Refer: [Performance_Evaluation_Analysis_top_worst_performer.xlsx]("./Performance_Evaluation_Analysis_top_worst_performer.xlsx")
+  Refer: [Performance_Evaluation_Analysis_top_worst_performer.xlsx](./Performance_Evaluation_Analysis_top_worst_performer.xlsx)
 
   __Groupwise performance of detector/descriptor combination:__
 
@@ -216,7 +216,7 @@ The decriptor and detector combination was run with regards to the TTC computati
 
   <img src="images/group_wise.PNG" width="779" height="414" /> 
   
-  Refer: [Performance_Evaluation_Analysis_Dect_desp_group.xlsx]("./Performance_Evaluation_Analysis_Dect_desp_group.xlsx")
+  Refer: [Performance_Evaluation_Analysis_Dect_desp_group.xlsx](./Performance_Evaluation_Analysis_Dect_desp_group.xlsx)
 
 In this final project, you will implement the missing parts in the schematic. To do this, you will complete four major tasks: 
 1. First, you will develop a way to match 3D objects over time by using keypoint correspondences. 
