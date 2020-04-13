@@ -95,7 +95,7 @@ Create a transmitted and receiver signal based on the wave equation provided in 
 
 Generated signals:
 
-<p align="center"><img src="images/signals.png" height=450 width="600"></p>
+<p align="center"><img src="images/Signals.png" height=450 width="600"></p>
 
 3. **Range Measurement (1D FFT calculation):**
 
